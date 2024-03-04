@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Design by foolishdeveloper.com -->
+    <title>LogIn-Page</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="stylesheet" href="/static/CSS/login.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+    <!-- Stylesheet -->
+</head>
+
+<body>
+    <div class="login-wrap">
+        <div class="login-html">
+            <input id="tab-1" type="radio" name="tab" class="sign-in" checked /><label for="tab-1" class="tab">Log
+                In</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up" /><a href="/signup/" for="tab-2" class="tab">Sign
+                Up</a>
+            <div class="login-form">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="sign-in-htm">
+                        <div class="group">
+                            <label for="user" class="label">Username</label>
+                            <input id="user" type="text" name="username" class="input" required />
+                        </div>
+                        <div class="group">
+                            <label for="pass" class="label">Password</label>
+                            <input id="pass" type="password" name="pass" class="input" required data-type="password" />
+                        </div>
+                        <div class="group">
+                            <input id="check" type="checkbox" class="check" checked />
+                            <label for="check"><span class="icon"></span> Keep me Signed in</label>
+                        </div>
+                        <div class="group">
+                            <input type="submit" class="button" value="Log In" />
+                        </div>
+                        {% if messages %}
+                        {{ message.tags }}
+                          <div class="alert alert-info" role="alert">
+                            {% for message in messages %}
+                            <span style="color:red">{{ message }}</span> 
+                            {% endfor %}
+                          </div>
+                          {% endif %}
+                        <div class="hr"></div>
+                        <div class="foot-lnk">
+                            <a href="#forgot">Forgot Password?</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
