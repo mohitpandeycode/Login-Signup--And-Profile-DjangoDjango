@@ -15,7 +15,17 @@
     color: #555;
     background: #ecf0f3;
   }
-  
+  .inner-area{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+  }
+  .inner-area img{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
   .gfg-div {
     position: relative;
     width: 350px;
@@ -24,6 +34,11 @@
     border-radius: 10px;
     background: #ecf0f3;
     box-shadow: -6px -6px 6px rgba(255, 255, 255, 0.8), 6px 6px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .arrow{
+    position: absolute;
+    left: 10px;
   }
   
   .gfg-logo {
@@ -46,7 +61,7 @@
     font-size: 28px;
     padding-top: 24px;
     letter-spacing: 0.5px;
-    color: #5ed887;
+    color: #007579;
   }
   
   .gfg-sub-title {
@@ -54,7 +69,7 @@
     font-size: 15px;
     padding-top: 7px;
     letter-spacing: 3px;
-    color: #5eaa77;
+    color: red;
   }
   
 .fa-facebook{

@@ -5,38 +5,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Add Your Links</title>
     <meta name="description" content="" />
-    <link rel="stylesheet" href="/static/CSS/addlink.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="/static/CSS/addlink.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-
   </head>
-
+  
   <body>
     <div class="gfg-div">
-      <div class="gfg-logo"></div>
+      <div class="icon arrow">
+        <a href="/home/"><i class="fas fa-arrow-left"></i></a>
+      </div>
+      <div class="gfg-logo">
+        <div class="inner-area">
+        <img src="{{ app_user.picture.url }}" alt="">
+      </div>
+      </div>
       <div class="info">
-        <div class="gfg-title">Geeksforgeeks</div>
+        <div class="gfg-title">{{user.username | upper}}</div>
         <div class="gfg-sub-title">Add Social Links..!</div>
       </div>
-      <div class="gfg-input-fields">
-        <i class="fab fa-facebook"></i>
-        <div class="gfg-email">
-            <input type="text" placeholder="Facebook"/>
+      <form method="post">
+        {% csrf_token %}
+        <div class="gfg-input-fields">
+          <i class="fab fa-facebook"></i>
+          <div class="gfg-email">
+            <input type="text" name="facebook" placeholder="Facebook" {% if links.facebook %}value="{{ links.facebook }}" {% endif %}/>
+          </div>
+          <i class="fab fa-twitter"></i>
+          <div class="gfg-password">
+            <input type="text" name="twitter" placeholder="Twitter" {% if links.twitter %}value="{{ links.twitter }}" {% endif %} />
+          </div>
+          <i class="fab fa-instagram"></i>
+          <div class="gfg-password">
+            <input type="text" name="instagram" placeholder="Instagram" {% if links.instagram %}value="{{ links.instagram }}" {% endif %} />
+          </div>
+          <i class="fab fa-youtube"></i>
+          <div class="gfg-password">
+            <input type="text" name="youtube" placeholder="Youtube" {% if links.youtube %}value="{{ links.youtube }}" {% endif %} />
+          </div>
         </div>
-        <i class="fab fa-twitter"></i>
-        <div class="gfg-password">
-            <input type="text" placeholder="Twitter" />
-        </div>
-        <i class="fab fa-instagram"></i>
-        <div class="gfg-password">
-            <input type="text" placeholder="Instagram" />
-        </div>
-        <i class="fab fa-youtube"></i>
-        <div class="gfg-password">
-          <input type="text" placeholder="Youtube" />
-        </div>
+        <button type="submit" class="gfg-button">Save</button>
+      </form>
+      {% if messages %}
+      {{ message.tags }}
+      <div class="alert alert-info" role="alert">
+      {% for message in messages %}
+      <span style="color:red">{{ message }}</span> 
+      {% endfor %}
       </div>
-      <button class="gfg-button">Save</button>
+      {% endif %}
     </div>
   </body>
 </html>

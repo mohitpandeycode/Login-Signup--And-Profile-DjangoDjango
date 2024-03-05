@@ -8,7 +8,7 @@ icon.addEventListener('click', () => {
 
     if (display === "none") {
         option.style.display = "block";
-        option.style.right = "0px";
+        option.style.left = "62%";
         symbol.className = "fas fa-times dots change "
     } else {
         option.style.display = "none";

@@ -200,12 +200,15 @@ body{
 .options{
   border: none;
   position: absolute;
-  top: 60px;
-  right: -80px;
+  top: 130px;
+  left: 0%;
+  width: 12%;
   display: none;
-  transition: all 1.5s ease-in;
+  z-index: 100;
+  border-radius: 10px;
 }
 .options button{
+  margin-bottom: 3px;
   position: relative;
   width: 100%;
   border: none;
@@ -217,7 +220,11 @@ body{
   border-radius: 5px;
   cursor: pointer;
   z-index: 4;
-  transition: all 1.5s ease-in;
+}
+.options button:hover{
+  background: #ecf0f3;
+  box-shadow: inset -3px -3px 7px #ffffff,
+              inset 3px 3px 5px #8b8b8c;
 }
 @media print {
   body * {

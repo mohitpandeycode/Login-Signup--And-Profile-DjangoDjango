@@ -3,17 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Neumorphism Profile Card</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="stylesheet" href="/static/CSS/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
 </head>
 <body>
 {% comment %} fas fa-times dots {% endcomment %}
- {% if user.is_authenticated %}
+{% if user.is_authenticated %}
+<div class="options">
+<a href="/links/{{user.username}}"><button>Add Social Links</button></a><hr>
+<a><button onclick="window.print()">Download Card</button></a><hr>
+<a href="/changePassword/"><button>Change Password</button></a>
+</div>
   <div class="wrapper" id="wrapper">
-    <div class="options">
-    <a href="/links/"><button>Add Links</button></a>
-    </div>
     <div class="img-area">
       <div class="inner-area">
         <img src="{{ app_user.picture.url }}" alt="">
@@ -24,13 +29,13 @@
     <div class="name">{{user.username | upper}}</div>
     <div class="about">{{user.email}}</div>
     <div class="social-icons">
-      <a href="#" class="fb"><i class="fab fa-facebook-f"></i></a>
-      <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
-      <a href="#" class="insta"><i class="fab fa-instagram"></i></a>
-      <a href="#" class="yt"><i class="fab fa-youtube"></i></a>
+      <a href="{{app_user.facebook}}" class="fb"><i class="fab fa-facebook-f"></i></a>
+      <a href="{{app_user.twitter}}" class="twitter"><i class="fab fa-twitter"></i></a>
+      <a href="{{app_user.instagram}}" class="insta"><i class="fab fa-instagram"></i></a>
+      <a href="{{app_user.youtube}}" class="yt"><i class="fab fa-youtube"></i></a>
     </div>
     <div class="buttons">
-      <button onclick="window.print()">Download Image</button>
+      <button>Message</button>
       <a href="/logout/" style="text-decoration: none;"><button>LogOut</button></a>
     </div>
     <div class="social-share">
