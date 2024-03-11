@@ -11,10 +11,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
 </head>
 <body>
-{% comment %} fas fa-times dots {% endcomment %}
+
+<div class="page">
 {% if user.is_authenticated %}
 <div class="options">
 <a href="/links/{{user.username}}"><button>Add Social Links</button></a><hr>
+<a href="/githubCard/"><button>GitHub Card</button></a><hr>
 <a><button onclick="window.print()">Download Card</button></a><hr>
 <a href="/changePassword/"><button>Change Password</button></a>
 </div>
@@ -29,13 +31,13 @@
     <div class="name">{{user.username | upper}}</div>
     <div class="about">{{user.email}}</div>
     <div class="social-icons">
-      <a href="{{app_user.facebook}}" class="fb"><i class="fab fa-facebook-f"></i></a>
+      <a href="{{app_user.github}}" class="fb"><i class="fab fa-github"></i></a>
       <a href="{{app_user.twitter}}" class="twitter"><i class="fab fa-twitter"></i></a>
       <a href="{{app_user.instagram}}" class="insta"><i class="fab fa-instagram"></i></a>
       <a href="{{app_user.youtube}}" class="yt"><i class="fab fa-youtube"></i></a>
     </div>
     <div class="buttons">
-      <button>Message</button>
+      <button onclick="window.location.href='mailto:{{user.email}}'">Message</button>
       <a href="/logout/" style="text-decoration: none;"><button>LogOut</button></a>
     </div>
     <div class="social-share">
@@ -56,6 +58,7 @@
     </div>
   </div>
   {% endif %}
+</div>
 
   <script src="/static/JS/index.js"></script>
 </body>

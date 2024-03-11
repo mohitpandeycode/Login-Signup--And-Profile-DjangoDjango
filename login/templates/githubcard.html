@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Neumorphism Profile Card</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="/static/CSS/index.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+  </head>
+  <body>
+    <div class="wrapper" id="wrapper">
+      {% if links == '' %}
+        <div class="error">
+          <p style="color: red;text-align: center;font-size: 1.2rem;">Add Github link to Make the Card..!</p><br />
+          <div class="buttons">
+            <button><a href="/links/{{ user.username }}">Add Social Links</a></button>
+          </div>
+        </div>
+      {% else %}
+        <div class="img-area">
+          <div class="inner-area">
+            <img src="https://static-00.iconduck.com/assets.00/profile-circle-icon-2048x2048-cqe5466q.png" alt="" />
+          </div>
+        </div>
+        <div class="icon arrow">
+          <a href="/home/"><i class="fas fa-arrow-left"></i></a>
+        </div>
+        <div class="name">User</div>
+        <div class="about">username</div>
+        <div class="social-icons">
+          Please enter a valid GitHub link!!!
+          <button style="padding: 5px; color: blue;border:none" onclick="window.location.href='/links/{{ user.username }}'">Update link
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+        <div class="buttons">
+          <button onclick="window.location.href = '{{ links }}'">GitHub</button>
+          <button onclick="window.print()">download</button>
+        </div>
+        <div class="social-share">
+          <div class="row">
+            <i class="fas fa-user-friends"></i>
+            <span class="followers">20.4k</span>
+          </div>
+          <div class="row">
+            <i class="fas fa-code-branch"></i>
+            <span class="repository">14.3k</span>
+          </div>
+          <div class="row">
+            <i class="fas fa-user"></i>
+            <span class="following">12.8k</span>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <script>
+      let image = document.querySelector('img')
+      let name = document.querySelector('.name')
+      let username = document.querySelector('.about')
+      let bio = document.querySelector('.social-icons')
+      let followers = document.querySelector('.followers')
+      let repository = document.querySelector('.repository')
+      let following = document.querySelector('.following')
+      try {
+        async function getGithubData() {
+          let url = '{{ link }}'
+          let response = await fetch(url)
+          let data = await response.json()
+          image.src = data.avatar_url || image.src
+          name.innerText = data.name || name.innerText
+          username.innerText = data.login || username.innerText
+          followers.innerText = data.followers || followers.innerText
+          following.innerText = data.following || following.innerText
+          repository.innerText = data.public_repos || repository.innerText
+          if (data.bio && data.bio.length > 100) {
+            bio.innerText = data.bio.substring(0, 100) + '...'
+          } else {
+            bio.innerHTML = data.bio || bio.innerHTML
+          }
+        }
+        getGithubData()
+      } catch (error) {
+        console.log(error)
+      }
+    </script>
+  </body>
+</html>

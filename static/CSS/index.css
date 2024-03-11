@@ -86,6 +86,7 @@ body{
 }
 .wrapper .social-icons{
   margin: 15px 0 25px 0;
+  color: red;
 }
 .social-icons a{
   position: relative;
@@ -197,12 +198,15 @@ body{
   opacity: 1;
   pointer-events: auto;
 }    
+.page{
+  position: relative;
+}
 .options{
   border: none;
   position: absolute;
-  top: 130px;
-  left: 0%;
-  width: 12%;
+  top: 50px;
+  /* left: 0%; */
+  width: 35%;
   display: none;
   z-index: 100;
   border-radius: 10px;
@@ -215,7 +219,7 @@ body{
   outline: none;
   padding: 4px 4px;
   color: #31344b;
-  font-size: 17px;
+  font-size: 0.8rem;
   font-weight: 400;
   border-radius: 5px;
   cursor: pointer;

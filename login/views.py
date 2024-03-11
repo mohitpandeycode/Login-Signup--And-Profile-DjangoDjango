@@ -65,14 +65,14 @@ def addLinks(request,id):
     app_user = get_object_or_404(Appuser, user=request.user)
     links = Appuser.objects.get(user = user)
     if request.method == "POST":
-        facebook = request.POST.get("facebook")
+        github = request.POST.get("github")
         twitter = request.POST.get("twitter")
         instagram = request.POST.get("instagram")
         youtube = request.POST.get("youtube")
 
         appuser, created = Appuser.objects.get_or_create(user=user)
 
-        appuser.facebook = facebook
+        appuser.github = github
         appuser.twitter = twitter
         appuser.instagram = instagram
         appuser.youtube = youtube
@@ -116,3 +116,11 @@ def change_password(request):
         else:
             messages.error(request, 'Invalid old password.')
     return render(request, 'changepass.html',{'appuser':app_user})
+
+def githubCard(request):
+    user = Appuser.objects.get(user = request.user)
+    githubLink = user.github
+    parts = githubLink.split('/')
+    username = parts[-1]
+    api_url = f"https://api.github.com/users/{username}"
+    return render(request, 'githubcard.html',{'link': api_url,'links':githubLink})

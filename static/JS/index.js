@@ -1,6 +1,7 @@
 let icon = document.querySelector('.dots');
 let option = document.querySelector('.options');
-let symbol = document.querySelector('.change')
+let symbol = document.querySelector('.change');
+let border = document.querySelector('.page');
 
 icon.addEventListener('click', () => {
     let computedStyle = window.getComputedStyle(option);
@@ -8,10 +9,12 @@ icon.addEventListener('click', () => {
 
     if (display === "none") {
         option.style.display = "block";
-        option.style.left = "62%";
+        option.style.right = "0";
+        border.style.width = "400px"
         symbol.className = "fas fa-times dots change "
     } else {
         option.style.display = "none";
         symbol.className = "fas fa-ellipsis-v change"
+        border.style.width = ""
     }
 });
