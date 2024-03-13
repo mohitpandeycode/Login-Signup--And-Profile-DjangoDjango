@@ -31,7 +31,7 @@
         <div class="name">User</div>
         <div class="about">username</div>
         <div class="social-icons">
-          Please enter a valid GitHub link!!!
+          Please enter a valid GitHub link or wait some seconds!!!
           <button style="padding: 5px; color: blue;border:none" onclick="window.location.href='/links/{{ user.username }}'">Update link
             <i class="fas fa-arrow-right"></i>
           </button>
@@ -70,16 +70,16 @@
           let url = '{{ link }}'
           let response = await fetch(url)
           let data = await response.json()
-          image.src = data.avatar_url || image.src
-          name.innerText = data.name || name.innerText
-          username.innerText = data.login || username.innerText
-          followers.innerText = data.followers || followers.innerText
-          following.innerText = data.following || following.innerText
-          repository.innerText = data.public_repos || repository.innerText
+          image.src = data.avatar_url || image.src;
+          name.innerText = data.name || name.innerText;
+          username.innerText = data.login || username.innerText;
+          followers.innerText = data.followers || followers.innerText;
+          following.innerText = data.following || following.innerText;
+          repository.innerText = data.public_repos || repository.innerText;
           if (data.bio && data.bio.length > 100) {
             bio.innerText = data.bio.substring(0, 100) + '...'
           } else {
-            bio.innerHTML = data.bio || bio.innerHTML
+            bio.innerHTML = data.bio || bio.innerHTML;
           }
         }
         getGithubData()

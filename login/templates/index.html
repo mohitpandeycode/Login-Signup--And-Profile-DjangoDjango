@@ -1,65 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Neumorphism Profile Card</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="stylesheet" href="/static/CSS/index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="/static/CSS/index.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
-</head>
-<body>
+  </head>
+  <body>
+    <div class="page">
+      {% if user.is_authenticated %}
+        <div class="options">
+          <a href="/links/{{ user.username }}"><button>Add Social Links</button></a><hr />
+          <a href="/githubCard/"><button>GitHub Card</button></a><hr />
+          <a><button onclick="window.print()">Download Card</button></a><hr />
+          <a href="/changePassword/"><button>Change Password</button></a>
+        </div>
+        <div class="wrapper" id="wrapper">
+          <div class="img-area">
+            <div class="inner-area">
+              <img src="{{ app_user.picture.url }}" alt="" onerror="src='https://static-00.iconduck.com/assets.00/profile-circle-icon-2048x2048-cqe5466q.png' " />
+            </div>
+          </div>
+          <div class="icon arrow">
+            <i class="fas fa-arrow-left"></i>
+          </div>
+          <div class="icon dots">
+            <i class="fas fa-ellipsis-v change"></i>
+          </div>
+          <div class="name">{{ user.username|upper }}</div>
+          <div class="about">{{ user.email }}</div>
+          <div class="social-icons">
+            <a href="{{ app_user.github }}" class="fb"><i class="fab fa-github"></i></a>
+            <a href="{{ app_user.twitter }}" class="twitter"><i class="fab fa-twitter"></i></a>
+            <a href="{{ app_user.instagram }}" class="insta"><i class="fab fa-instagram"></i></a>
+            <a href="{{ app_user.youtube }}" class="yt"><i class="fab fa-youtube"></i></a>
+          </div>
+          <div class="buttons">
+            <a href="mailto:{{ user.email }}"><button>Message</button>
+            <a href="/logout/" style="text-decoration: none;"><button>LogOut</button></a>
+          </div>
+          <div class="social-share">
+            <div class="row">
+              <i class="far fa-heart"></i>
+              <i class="icon-2 fas fa-heart"></i>
+              <span>20.4k</span>
+            </div>
+            <div class="row">
+              <i class="far fa-comment"></i>
+              <i class="icon-2 fas fa-comment"></i>
+              <span>14.3k</span>
+            </div>
+            <div class="row">
+              <i class="fas fa-share"></i>
+              <span>12.8k</span>
+            </div>
+          </div>
+          {% if messages %}
+            {{ message.tags }}
+            <div class="alert alert-info" role="alert">
+              {% for message in messages %}
+                <span class="msg" style="color:green">
+                  {{ message }}
+                  <i style="color:red; " class="fas fa-times dots cancel"></i>
+                </span>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
 
-<div class="page">
-{% if user.is_authenticated %}
-<div class="options">
-<a href="/links/{{user.username}}"><button>Add Social Links</button></a><hr>
-<a href="/githubCard/"><button>GitHub Card</button></a><hr>
-<a><button onclick="window.print()">Download Card</button></a><hr>
-<a href="/changePassword/"><button>Change Password</button></a>
-</div>
-  <div class="wrapper" id="wrapper">
-    <div class="img-area">
-      <div class="inner-area">
-        <img src="{{ app_user.picture.url }}" alt="">
-      </div>
-    </div>
-    <div class="icon arrow"><i class="fas fa-arrow-left"></i></div>
-    <div class="icon dots"><i class="fas fa-ellipsis-v change"></i></div>
-    <div class="name">{{user.username | upper}}</div>
-    <div class="about">{{user.email}}</div>
-    <div class="social-icons">
-      <a href="{{app_user.github}}" class="fb"><i class="fab fa-github"></i></a>
-      <a href="{{app_user.twitter}}" class="twitter"><i class="fab fa-twitter"></i></a>
-      <a href="{{app_user.instagram}}" class="insta"><i class="fab fa-instagram"></i></a>
-      <a href="{{app_user.youtube}}" class="yt"><i class="fab fa-youtube"></i></a>
-    </div>
-    <div class="buttons">
-      <button onclick="window.location.href='mailto:{{user.email}}'">Message</button>
-      <a href="/logout/" style="text-decoration: none;"><button>LogOut</button></a>
-    </div>
-    <div class="social-share">
-      <div class="row">
-        <i class="far fa-heart"></i>
-        <i class="icon-2 fas fa-heart"></i>
-        <span>20.4k</span>
-      </div>
-      <div class="row">
-        <i class="far fa-comment"></i>
-        <i class="icon-2 fas fa-comment"></i>
-        <span>14.3k</span>
-      </div>
-      <div class="row">
-        <i class="fas fa-share"></i>
-        <span>12.8k</span>
-      </div>
-    </div>
-  </div>
-  {% endif %}
-</div>
-
-  <script src="/static/JS/index.js"></script>
-</body>
+    <script src="/static/JS/index.js"></script>
+    <script>
+      let card = document.getElementById('wrapper')
+      let image = document.querySelector('.inner-area')
+      image.addEventListener('click', () => {
+        card.classList.toggle('hover')
+        card.innerHTML = `
+                                            <div style="top:0;left:0;" class="icon arrow">
+                                              <a href="/home/"><i class="fas fa-arrow-left"></i></a>
+                                            </div>
+                                            <img class="profilepic" src = {{ app_user.picture.url }} 
+                                            onerror="src='https://static-00.iconduck.com/assets.00/profile-circle-icon-2048x2048-cqe5466q.png' ">
+                                            <br>
+                                            <form method="post" enctype="multipart/form-data">
+                                              {% csrf_token %}
+                                              <label style="color:red" for="changeimg">Change Image:</label>
+                                              <input name="newImage" type="file" accept=".jpg,.jpeg,.png">
+                                              <br><br>
+                                              <div class="buttons">
+                                                <button type="submit">Save</button>
+                                              </div>
+                                            </form>
+                                            `
+      })
+    </script>
+  </body>
 </html>

@@ -58,6 +58,17 @@ def signupPage(request):
 
 def index(request):
     app_user = get_object_or_404(Appuser, user=request.user)
+    if request.method == "POST":
+        picture = request.FILES.get('newImage')
+        appuser, created = Appuser.objects.get_or_create(user=request.user)
+
+        appuser.picture = picture
+    # Save the changes to the database
+        appuser.save()
+        messages.success(request, "Picture Updated Successfully!")
+        return redirect("/home/")
+
+
     return render(request, 'index.html', {'app_user': app_user})
 
 def addLinks(request,id):

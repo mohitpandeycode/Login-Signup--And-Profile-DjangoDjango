@@ -73,6 +73,11 @@ body{
   border-radius: 50%;
   object-fit: cover;
 }
+.profilepic{
+  width: 270px;
+  border-radius: 5px;
+  box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #787878;
+}
 .wrapper .name{
   font-size: 23px;
   font-weight: 500;

@@ -2,6 +2,8 @@ let icon = document.querySelector('.dots');
 let option = document.querySelector('.options');
 let symbol = document.querySelector('.change');
 let border = document.querySelector('.page');
+let cancel = document.querySelector('.cancel');
+let msg = document.querySelector('.msg');
 
 icon.addEventListener('click', () => {
     let computedStyle = window.getComputedStyle(option);
@@ -18,3 +20,8 @@ icon.addEventListener('click', () => {
         border.style.width = ""
     }
 });
+
+cancel.addEventListener('click',()=>{
+    msg.innerHTML = '';
+})
+
