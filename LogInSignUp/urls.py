@@ -21,7 +21,6 @@ from django.urls import path, include
 from django.conf.urls import url  # Add this import for 'url'
 
 urlpatterns = [
-    url(r'^jet/', include(('jet.urls', 'jet'), namespace='jet')),  # Django JET URLS
     path('admin/', admin.site.urls),
     path('', include('login.urls')),
 ]
